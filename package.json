@@ -1,0 +1,33 @@
+{
+  "name": "backend-pagina-profe",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000E\u0000n\u0000g\u0000l\u0000i\u0000s\u0000h\u0000-\u0000p\u0000a\u0000g\u0000e\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauolivera90/English-page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lauolivera90/English-page/issues"
+  },
+  "homepage": "https://github.com/lauolivera90/English-page#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.18.1",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

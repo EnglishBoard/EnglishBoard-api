@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: .
+    container_name: english_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+    command: ["npm", "run", "dev"]
+
+volumes:
+  mongo-data:
