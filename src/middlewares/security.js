@@ -11,10 +11,13 @@ const applySecurityMiddlewares = (app) => {
   app.use(morgan("dev"));
 
   app.use(cors({
-    origin: "http://127.0.0.1:5500/", origin: 
-    "https://linked29-sys.github.io",
-    optionsSuccessStatus: 200
+  origin: [
+    "http://127.0.0.1:5500",
+    "https://linked29-sys.github.io"
+  ],
+  optionsSuccessStatus: 200
   }));
+
 
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
