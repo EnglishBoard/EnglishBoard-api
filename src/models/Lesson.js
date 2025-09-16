@@ -27,6 +27,16 @@ const lessonSchema = new mongoose.Schema({
     enum: ['grammar', 'vocabulary', 'listening', 'reading', 'writing', 'speaking'],
     required: true
   },
+  upload_date:{
+    type: Date,
+    default: Date.now,
+    validate: {
+        validator: function (value) {
+            return value <= new Date();
+        },
+    message: "upload date must be today"
+    }
+  },
   modules: [moduleSchema]
 });
 
