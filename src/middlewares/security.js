@@ -11,13 +11,7 @@ const applySecurityMiddlewares = (app) => {
   app.use(morgan("dev"));
 
   app.use(cors({
-<<<<<<< HEAD
-    origin: "http://127.0.0.1:5500",
-=======
-    origin: "http://127.0.0.1:5500/,
-    "https://linked29-sys.github.io",
-    ,
->>>>>>> 1294fdac7112b2d850096a7fb134872f30fc9cfd
+    origin: "http://localhost:5173", // ⚠️ Cambiar en producción
     optionsSuccessStatus: 200
   }));
 
