@@ -13,6 +13,9 @@ applySecurityMiddlewares(app);
 app.use(express.json());
 
 app.use('/', router);
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

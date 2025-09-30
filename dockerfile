@@ -1,18 +1,16 @@
-# Usa una imagen de Node oficial
-FROM node:18
+FROM node:20-alpine
 
-# Crea un directorio de trabajo
+ENV NODE_ENV=production
+
 WORKDIR /app
 
-# Copia los archivos
 COPY package*.json ./
+
+RUN npm ci --omit=dev
+
 COPY . .
 
-# Instala las dependencias
-RUN npm install
-
-# Expone el puerto
 EXPOSE 3000
 
-# Comando para ejecutar la app
+# Arranque
 CMD ["node", "src/app.js"]
