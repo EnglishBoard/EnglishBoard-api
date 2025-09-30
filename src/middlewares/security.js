@@ -13,7 +13,7 @@ const applySecurityMiddlewares = (app) => {
   app.use(cors({
   origin: [
     "http://127.0.0.1:5500",
-    "https://linked29-sys.github.io"
+    "https://linked29-sys.github.io/English-First-year"
   ],
   optionsSuccessStatus: 200
   }));
