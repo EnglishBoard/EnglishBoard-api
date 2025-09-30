@@ -8,21 +8,21 @@ const sendEmail = async (req, res) => {
   }
 
   try {
-    // Transporter confiable para Gmail con App Password
+    // Transporter confiable para Brevo (Sendinblue)
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp-relay.brevo.com",
       port: 587,
-      secure: false, // true para 465, false para 587
+      secure: false,
       auth: {
-        user: process.env.CONTACT_EMAIL,
-        pass: process.env.CONTACT_PASS,
+        user: process.env.BREVO_USER, // tu email registrado en Brevo
+        pass: process.env.BREVO_PASS, // tu API key de Brevo
       },
     });
 
     const mailOptions = {
-      from: `"${name}" <${process.env.CONTACT_EMAIL}>`, // siempre el correo autenticado
-      to: process.env.CONTACT_EMAIL, // destino
-      replyTo: email || undefined, // si el usuario puso email, va acá
+      from: `"${name}" <${process.env.BREVO_USER}>`, // siempre el correo autenticado
+      to: process.env.CONTACT_EMAIL, // destino final (ej: el profe)
+      replyTo: email || undefined,
       subject: `[EnglishBoard] ${subject}`,
       text: `
         Name: ${name}
