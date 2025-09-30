@@ -11,7 +11,7 @@ const sendEmail = async (req, res) => {
     // Transporter confiable para Gmail con App Password
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port: 465,
+      port: 587,
       secure: true, // true para 465, false para 587
       auth: {
         user: process.env.CONTACT_EMAIL,
