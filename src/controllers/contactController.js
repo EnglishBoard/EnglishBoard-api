@@ -23,7 +23,7 @@ const sendEmail = async (req, res) => {
       headers: {
         "accept": "application/json",
         "content-type": "application/json",
-        "api-key": process.env.BRAVE_PASS, // tu clave API de Brevo
+        "api-key": process.env.BREVO_PASS, // tu clave API de Brevo
       },
       body: JSON.stringify({
         sender: { name: "EnglishBoard", email: process.env.CONTACT_EMAIL },
