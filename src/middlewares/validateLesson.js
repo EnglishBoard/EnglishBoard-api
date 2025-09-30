@@ -1,4 +1,3 @@
-
 const { body, validationResult } = require('express-validator');
 
 const validateLesson = [
@@ -11,15 +10,16 @@ const validateLesson = [
 
   body('shortDescription')
     .notEmpty().withMessage('Short description is required')
-    .isLength({ max: 300 }).withMessage('Short description must be under 500 characters'),
+    .isLength({ max: 300 }).withMessage('Short description must be under 300 characters'),
 
-    body('gradeId')
+  body('gradeId')
     .notEmpty().withMessage('Grade ID is required')
-    .isString().withMessage('Grade ID must be a string'),
+    .isMongoId().withMessage('Grade ID must be a valid MongoDB ObjectId'),
 
   body('type')
     .notEmpty().withMessage('Type is required')
-    .isIn(['grammar', 'vocabulary', 'listening', 'reading', 'writing', 'speaking']).withMessage('Invalid type'),
+    .isIn(['grammar', 'vocabulary', 'listening', 'reading', 'writing', 'speaking'])
+    .withMessage('Invalid type'),
 
   body('modules')
     .isArray({ min: 1 }).withMessage('Modules must be an array with at least one module'),

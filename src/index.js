@@ -1,6 +1,5 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const cors = require('cors');
 const router = require('./routes');
 const applySecurityMiddlewares = require("./middlewares/security");
 require('dotenv').config();

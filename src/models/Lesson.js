@@ -8,8 +8,8 @@ const lessonSchema = new mongoose.Schema({
     required: true
   },
   gradeId: {
-    type: String,
-    trim: true,
+    type: mongoose.Schema.Types.ObjectId, // ahora referencia a Grade
+    ref: "Grade",
     required: true
   },
   shortDescription: {
@@ -27,17 +27,17 @@ const lessonSchema = new mongoose.Schema({
     enum: ['grammar', 'vocabulary', 'listening', 'reading', 'writing', 'speaking'],
     required: true
   },
-  upload_date:{
+  upload_date: {
     type: Date,
     default: Date.now,
     validate: {
-        validator: function (value) {
-            return value <= new Date();
-        },
-    message: "upload date must be today"
+      validator: function (value) {
+        return value <= new Date();
+      },
+      message: "upload date must be today"
     }
   },
   modules: [moduleSchema]
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Lesson', lessonSchema);
