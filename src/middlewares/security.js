@@ -13,10 +13,11 @@ const applySecurityMiddlewares = (app) => {
   app.use(cors({
   origin: [
     "http://127.0.0.1:5500",
-    "https://linked29-sys.github.io/English-First-year"
+    "https://linked29-sys.github.io"
   ],
   optionsSuccessStatus: 200
   }));
+
 
 
   const limiter = rateLimit({
