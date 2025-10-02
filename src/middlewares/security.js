@@ -28,7 +28,7 @@ const applySecurityMiddlewares = (app) => {
     }
   });
 
-  app.use(limiter);
-};*/
+  app.use(limiter);*/
+};
 
 module.exports = applySecurityMiddlewares;
