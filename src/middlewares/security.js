@@ -14,7 +14,7 @@ const applySecurityMiddlewares = (app) => {
   origin: [
     "http://127.0.0.1:5500",
     "https://linked29-sys.github.io",
-    "http://192.168.1.1:5500"
+    "http://192.168.1.2:5500"
   ],
   optionsSuccessStatus: 200
   }));
