@@ -12,6 +12,10 @@ const lessonSchema = new mongoose.Schema({
     ref: "Grade",
     required: true
   },
+  unitId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
   shortDescription: {
     type: String,
     trim: true,

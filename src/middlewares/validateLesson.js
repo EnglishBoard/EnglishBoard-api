@@ -16,6 +16,10 @@ const validateLesson = [
     .notEmpty().withMessage('Grade ID is required')
     .isMongoId().withMessage('Grade ID must be a valid MongoDB ObjectId'),
 
+  body('unitId')
+    .notEmpty().withMessage('Unit ID is required')
+    .isMongoId().withMessage('Unit ID must be a valid MongoDB ObjectId'),
+
   body('type')
     .notEmpty().withMessage('Type is required')
     .isIn(['grammar', 'vocabulary', 'listening', 'reading', 'writing', 'speaking'])

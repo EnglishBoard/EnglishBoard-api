@@ -1,5 +1,16 @@
 const mongoose = require("mongoose");
 
+const unitSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+  },
+  { _id: true }
+);
+
 const gradeSchema = new mongoose.Schema(
   {
     title: {
@@ -37,6 +48,10 @@ const gradeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Institute",
       required: true,
+    },
+    units: {
+      type: [unitSchema],
+      default: [],
     },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
