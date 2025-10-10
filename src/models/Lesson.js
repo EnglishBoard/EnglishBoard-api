@@ -13,8 +13,7 @@ const lessonSchema = new mongoose.Schema({
     required: true
   },
   unitId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
+    type: mongoose.Schema.Types.ObjectId
   },
   shortDescription: {
     type: String,
