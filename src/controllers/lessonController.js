@@ -2,7 +2,7 @@ const Lesson = require('../models/Lesson');
 
 const getAllLessons = async (req, res) => {
   try {
-    const lessons = await Lesson.find().select("-modules -__v");
+    const lessons = await Lesson.find().select("-__v");
     res.status(200).json(lessons);
   } catch (error) {
     res.status(500).json({ message: error.message });
