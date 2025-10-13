@@ -12,9 +12,9 @@ const applySecurityMiddlewares = (app) => {
 
   app.use(cors({
   origin: [
-    "http://127.0.0.1:5500",
+    "http://127.0.0.1:3000",
     "https://linked29-sys.github.io",
-    "http://192.168.1.2:5500"
+    "http://192.168.1.2:3000"
   ],
   optionsSuccessStatus: 200
   }));
