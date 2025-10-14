@@ -2,15 +2,12 @@ const Grade = require("../models/GradeSchema");
 const Lesson = require("../models/Lesson");
 const Institute = require("../models/InstituteSchema");
 
-
-// Get all grades (with lesson count)
-const getAllGrades = async (req, res) => {
+const getGradesByInstitute = async (req, res) => {
   try {
-    const grades = await Grade.find()
-      .populate("institute", "name")
-      .lean();
+    const { instituteId } = req.params;
 
-    // Añadir cantidad de lecciones
+    const grades = await Grade.find({ institute: instituteId });
+
     const gradesWithLessons = await Promise.all(
       grades.map(async (grade) => {
         const lessonCount = await Lesson.countDocuments({ gradeId: grade._id });
@@ -18,13 +15,16 @@ const getAllGrades = async (req, res) => {
       })
     );
 
-    res.status(200).json(gradesWithLessons);
+    if (!grades) {
+      return res.status(404).json({ message: 'No se encontraron grados para este instituto' });
+    }
+
+    res.json(grades);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'Error en el servidor', error });
   }
 };
 
-// Get grade by ID
 const getGradeById = async (req, res) => {
   try {
     const grade = await Grade.findById(req.params.id)
@@ -37,15 +37,13 @@ const getGradeById = async (req, res) => {
   }
 };
 
-// Create a new grade
 const createGrade = async (req, res) => {
   try {
     const grade = new Grade(req.body);
     await grade.save();
 
-    // actualizar referencia en el instituto
     await Institute.findByIdAndUpdate(
-      grade.institute, // ojo: minúscula
+      grade.institute,
       { $push: { grades: grade._id } }
     );
 
@@ -55,8 +53,6 @@ const createGrade = async (req, res) => {
   }
 };
 
-
-// Update a grade
 const updateGrade = async (req, res) => {
   try {
     const updated = await Grade.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -67,7 +63,6 @@ const updateGrade = async (req, res) => {
   }
 };
 
-// Delete a grade
 const deleteGrade = async (req, res) => {
   try {
     const deleted = await Grade.findByIdAndDelete(req.params.id);
@@ -79,7 +74,7 @@ const deleteGrade = async (req, res) => {
 };
 
 module.exports = {
-  getAllGrades,
+  getGradesByInstitute,
   getGradeById,
   createGrade,
   updateGrade,
