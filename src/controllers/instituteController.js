@@ -3,12 +3,8 @@ const Institute = require("../models/InstituteSchema");
 // Get all institutes
 const getAllInstitutes = async (req, res) => {
   try {
-    const institutes = await Institute.find().select("-__v -createdAt -updatedAt")
-      .populate({
-        path: "grades",
-        select: "-institute -__v -createdAt -updatedAt",
-        populate: { path: "lessonCount" },
-    });
+    const institutes = await Institute.find()
+    
     res.status(200).json(institutes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -18,13 +14,8 @@ const getAllInstitutes = async (req, res) => {
 // Get institute by ID
 const getInstituteById = async (req, res) => {
   try {
-    const institute = await Institute.findById(req.params.id)
-      .populate({
-        path: "grades",
-        select: "-institute -__v -createdAt -updatedAt",
-        populate: { path: "lessonCount" }, // 🔹 agrega la cantidad de lecciones
-      });
-
+    const institute = await Institute.findById(req.params.id);
+    
     if (!institute) return res.status(404).json({ message: "Institute not found" });
 
     res.status(200).json(institute);
