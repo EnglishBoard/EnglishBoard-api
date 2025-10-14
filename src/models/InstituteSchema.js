@@ -15,6 +15,7 @@ const instituteSchema = new mongoose.Schema(
       type: String,
       default: "#000000", // color por defecto
     },
+  },
   { timestamps: true }
 );
 
