@@ -15,14 +15,6 @@ const instituteSchema = new mongoose.Schema(
       type: String,
       default: "#000000", // color por defecto
     },
-    // 🔹 Los grados referenciados
-    grades: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Grade",
-      },
-    ],
-  },
   { timestamps: true }
 );
 
