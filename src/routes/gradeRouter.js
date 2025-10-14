@@ -4,8 +4,8 @@ const router = express.Router();
 const gradeController = require('../controllers/gradeController.js');
 const validateGrade = require('../middlewares/validateGrade.js');
 
-// Get all grades
-router.get("/", gradeController.getAllGrades);
+// Get grades by institute
+router.get('/institute/:instituteId', gradeController.getGradesByInstitute);
 
 // Get grade by id
 router.get("/:id", gradeController.getGradeById);
