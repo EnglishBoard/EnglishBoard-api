@@ -5,8 +5,14 @@ const Institute = require("../models/InstituteSchema");
 const getGradesByInstitute = async (req, res) => {
   try {
     const { instituteId } = req.params;
+    
+    const grades = await Grade.find({ institute: instituteId })
+      .populate("institute", "name")
+      .lean();
 
-    const grades = await Grade.find({ institute: instituteId });
+    if (!grades.length) {
+      return res.status(404).json({ message: 'No se encontraron grados para este instituto' });
+    }
 
     const gradesWithLessons = await Promise.all(
       grades.map(async (grade) => {
@@ -15,13 +21,10 @@ const getGradesByInstitute = async (req, res) => {
       })
     );
 
-    if (!grades) {
-      return res.status(404).json({ message: 'No se encontraron grados para este instituto' });
-    }
+    res.status(200).json(gradesWithLessons);
 
-    res.json(grades);
   } catch (error) {
-    res.status(500).json({ message: 'Error en el servidor', error });
+    res.status(500).json({ message: error.message });
   }
 };
 
