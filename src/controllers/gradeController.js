@@ -30,7 +30,8 @@ const getGradesByInstitute = async (req, res) => {
 
 const getGradeById = async (req, res) => {
   try {
-    const grades = await Grade.find()
+    const {id} = req.params
+    const grade = await Grade.find({_id: id})
     
     if (!grade) return res.status(404).json({ message: "Grade not found" });
     res.status(200).json(grade);
