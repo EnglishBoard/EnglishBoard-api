@@ -48,12 +48,7 @@ const getGradeById = async (req, res) => {
 const createGrade = async (req, res) => {
   try {
     const grade = new Grade(req.body);
-    await grade.save();
-
-    await Institute.findByIdAndUpdate(
-      grade.institute,
-      { $push: { grades: grade._id } }
-    );
+    await grade.save(); 
 
     res.status(201).json(grade);
   } catch (error) {
@@ -63,8 +58,16 @@ const createGrade = async (req, res) => {
 
 const updateGrade = async (req, res) => {
   try {
-    const updated = await Grade.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).json({ message: "Grade not found" });
+    const grade = await Grade.findById(req.params.id);
+
+    if (!grade) {
+      return res.status(404).json({ message: "Grade not found" });
+    }
+
+    Object.assign(grade, req.body);
+    
+    const updated = await grade.save(); 
+
     res.status(200).json(updated);
   } catch (error) {
     res.status(400).json({ message: error.message });
