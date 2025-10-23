@@ -60,12 +60,22 @@ const gradeSchema = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// 🔹 Virtual para contar lecciones
+gradeSchema.pre('save', function (next) {
+  if (this.isModified('units') || this.isNew) {
+    
+    this.units.forEach((unit, index) => {
+      unit.unitNumber = index + 1;
+    });
+  }
+  
+  next();
+});
+
 gradeSchema.virtual("lessonCount", {
   ref: "Lesson",
   localField: "_id",
   foreignField: "gradeId",
-  count: true, // devuelve el número de documentos
+  count: true,
 });
 
 module.exports = mongoose.model("Grade", gradeSchema);
