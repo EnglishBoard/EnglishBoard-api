@@ -51,15 +51,4 @@ const validateGrade = [
   }
 ];
 
-gradeSchema.pre('save', function (next) {
-  if (this.isModified('units') || this.isNew) {
-    
-    this.units.forEach((unit, index) => {
-      unit.unitNumber = index + 1;
-    });
-  }
-  
-  next();
-});
-
 module.exports = validateGrade;
